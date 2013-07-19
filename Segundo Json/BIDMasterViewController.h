@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class BIDDetailViewController;
+
 
 @interface BIDMasterViewController : UITableViewController
 
-@property (strong, nonatomic) BIDDetailViewController *detailViewController;
+@property (nonatomic,strong) NSArray *comunidades;
+
+-(void)empezarAParsear:(NSData *)urlData;
+-(void)generarJSON:(id)sender;
+
 
 @end

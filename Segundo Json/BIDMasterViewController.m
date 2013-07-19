@@ -8,15 +8,14 @@
 
 #import "BIDMasterViewController.h"
 
-#import "BIDDetailViewController.h"
 
-@interface BIDMasterViewController () {
-    NSMutableArray *_objects;
-}
-@end
+
 
 @implementation BIDMasterViewController
 
+@synthesize comunidades;
+
+/*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -25,11 +24,11 @@
     }
     return self;
 }
-							
+
+*/
+
 - (void)dealloc
 {
-    [_detailViewController release];
-    [_objects release];
     [super dealloc];
 }
 
@@ -37,10 +36,25 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    /*self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)] autorelease];
-    self.navigationItem.rightBarButtonItem = addButton;
+   /* 
+     IBarButtonItem *addButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)] autorelease];
+      self.navigationItem.rightBarButtonItem = addButton;
+    */
+    UIBarButtonItem *json=[[UIBarButtonItem alloc]initWithTitle:@"Generar JSON" style:UIBarButtonItemStylePlain target:self action:@selector(generarJSON:)];
+    
+    self.navigationItem.rightBarButtonItem=json;
+    [json release];
+    
+    
+    NSURL *url=[NSURL URLWithString:@"http://dl.dropbox.com/u/270074/iOSTutorials/JSON/test.json"];
+    NSData *urlData=[NSData dataWithContentsOfURL:url];
+    
+    [self empezarAParsear:urlData];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +63,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
 - (void)insertNewObject:(id)sender
 {
     if (!_objects) {
@@ -58,6 +73,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+ */
 
 #pragma mark - Table View
 
@@ -68,7 +84,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return [self.comunidades count];
 }
 
 // Customize the appearance of table view cells.
@@ -78,13 +94,24 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+       /* cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        */
+        
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-
-
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    
+    NSDictionary *comunidad= [self.comunidades objectAtIndex:indexPath.row];
+    cell.textLabel.text=[comunidad objectForKey:@"nombre"];
+    cell.textLabel.textColor=[UIColor redColor];
+    NSString *subtitulo=[NSString stringWithFormat:@"Superficie: %@ - Porcentaje: %@",[comunidad objectForKey:@"superficie"],[comunidad objectForKey:@"porcentaje"]];
+    cell.detailTextLabel.text=subtitulo;
+    cell.detailTextLabel.textColor=[UIColor blueColor];
+    
+    cell.imageView.image=[UIImage imageNamed:@"1Star.png"];
+    
+ //[cell setBackgroundColor:[UIColor colorWithRed:32 green:25 blue:12 alpha:1]];
+    self.tableView.backgroundColor=[UIColor grayColor];
     return cell;
 }
 
@@ -94,6 +121,7 @@
     return YES;
 }
 
+/*
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -103,6 +131,7 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
+ */
 
 /*
 // Override to support rearranging the table view.
@@ -122,12 +151,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!self.detailViewController) {
-        self.detailViewController = [[[BIDDetailViewController alloc] initWithNibName:@"BIDDetailViewController" bundle:nil] autorelease];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+
+-(void)empezarAParsear:(NSData *)urlData
+{
+    NSError *error=nil;
+    
+    NSDictionary *jsonDic=[NSJSONSerialization JSONObjectWithData:urlData options:kNilOptions error:&error];
+    
+    if (error!=nil) {
+        NSLog(@"Error : %@", [error localizedDescription]);
     }
-    NSDate *object = _objects[indexPath.row];
-    self.detailViewController.detailItem = object;
-    [self.navigationController pushViewController:self.detailViewController animated:YES];
+    else{
+        self.comunidades=[jsonDic objectForKey:@"comunidades"];
+    }
+}
+
+-(void)generarJSON:(id)sender
+{
+    NSError *error=nil;
+    
+    NSData *json=[NSJSONSerialization dataWithJSONObject:self.comunidades options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSString *jsonString=[[NSString alloc]initWithData:json encoding:NSUTF8StringEncoding];
+    
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:jsonString delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+    [alert show];
+    [jsonString release];
+    [alert release];
 }
 
 @end

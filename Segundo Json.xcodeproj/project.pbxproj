@@ -17,9 +17,8 @@
 		8F9690BE1798280400E87E2A /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9690BD1798280400E87E2A /* Default@2x.png */; };
 		8F9690C01798280400E87E2A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9690BF1798280400E87E2A /* Default-568h@2x.png */; };
 		8F9690C31798280400E87E2A /* BIDMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9690C21798280400E87E2A /* BIDMasterViewController.m */; };
-		8F9690C61798280400E87E2A /* BIDDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9690C51798280400E87E2A /* BIDDetailViewController.m */; };
 		8F9690C91798280400E87E2A /* BIDMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F9690C71798280400E87E2A /* BIDMasterViewController.xib */; };
-		8F9690CC1798280400E87E2A /* BIDDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F9690CA1798280400E87E2A /* BIDDetailViewController.xib */; };
+		8F969160179863DC00E87E2A /* 1Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F96915F179863DC00E87E2A /* 1Star.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,10 +37,8 @@
 		8F9690BF1798280400E87E2A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8F9690C11798280400E87E2A /* BIDMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BIDMasterViewController.h; sourceTree = "<group>"; };
 		8F9690C21798280400E87E2A /* BIDMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BIDMasterViewController.m; sourceTree = "<group>"; };
-		8F9690C41798280400E87E2A /* BIDDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BIDDetailViewController.h; sourceTree = "<group>"; };
-		8F9690C51798280400E87E2A /* BIDDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BIDDetailViewController.m; sourceTree = "<group>"; };
 		8F9690C81798280400E87E2A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BIDMasterViewController.xib; sourceTree = "<group>"; };
-		8F9690CB1798280400E87E2A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BIDDetailViewController.xib; sourceTree = "<group>"; };
+		8F96915F179863DC00E87E2A /* 1Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1Star.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,10 +89,7 @@
 				8F9690B91798280400E87E2A /* BIDAppDelegate.m */,
 				8F9690C11798280400E87E2A /* BIDMasterViewController.h */,
 				8F9690C21798280400E87E2A /* BIDMasterViewController.m */,
-				8F9690C41798280400E87E2A /* BIDDetailViewController.h */,
-				8F9690C51798280400E87E2A /* BIDDetailViewController.m */,
 				8F9690C71798280400E87E2A /* BIDMasterViewController.xib */,
-				8F9690CA1798280400E87E2A /* BIDDetailViewController.xib */,
 				8F9690B01798280400E87E2A /* Supporting Files */,
 			);
 			path = "Segundo Json";
@@ -104,6 +98,7 @@
 		8F9690B01798280400E87E2A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8F96915F179863DC00E87E2A /* 1Star.png */,
 				8F9690B11798280400E87E2A /* Segundo Json-Info.plist */,
 				8F9690B21798280400E87E2A /* InfoPlist.strings */,
 				8F9690B51798280400E87E2A /* main.m */,
@@ -172,7 +167,7 @@
 				8F9690BE1798280400E87E2A /* Default@2x.png in Resources */,
 				8F9690C01798280400E87E2A /* Default-568h@2x.png in Resources */,
 				8F9690C91798280400E87E2A /* BIDMasterViewController.xib in Resources */,
-				8F9690CC1798280400E87E2A /* BIDDetailViewController.xib in Resources */,
+				8F969160179863DC00E87E2A /* 1Star.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +181,6 @@
 				8F9690B61798280400E87E2A /* main.m in Sources */,
 				8F9690BA1798280400E87E2A /* BIDAppDelegate.m in Sources */,
 				8F9690C31798280400E87E2A /* BIDMasterViewController.m in Sources */,
-				8F9690C61798280400E87E2A /* BIDDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,14 +201,6 @@
 				8F9690C81798280400E87E2A /* en */,
 			);
 			name = BIDMasterViewController.xib;
-			sourceTree = "<group>";
-		};
-		8F9690CA1798280400E87E2A /* BIDDetailViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8F9690CB1798280400E87E2A /* en */,
-			);
-			name = BIDDetailViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -315,6 +301,7 @@
 				8F9690D11798280400E87E2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
